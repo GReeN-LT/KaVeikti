@@ -17,7 +17,7 @@ import com.facebook.login.widget.LoginButton;
 
 //TODO : Pabandyt firebase integruot
 public class MainActivity extends AppCompatActivity {
-
+//
     LoginButton loginButton;
     TextView textView;
     CallbackManager callbackManager;
