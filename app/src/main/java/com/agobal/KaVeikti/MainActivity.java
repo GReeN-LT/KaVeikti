@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
 //bandau github 2
 
+        //noinspection deprecation
         FacebookSdk.sdkInitialize(getApplicationContext());
 
         setContentView(R.layout.activity_main);
@@ -40,9 +41,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(LoginResult loginResult) {
 
-               textView.setText("Prisijungimas sėkmingas \n  "
-                        + loginResult.getAccessToken().getUserId() +
-                        "\n" + loginResult.getAccessToken().getToken() );
+               textView.setText("Prisijungimas sėkmingas \n  "+
+                       "VartotojoID: " + loginResult.getAccessToken().getUserId() +
+                        "\n" + "\n Vartotojo Tokenas: " +loginResult.getAccessToken().getToken() );
 
                 //textView.setText("Prisijungimas sėkmingas");
             }
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onError(FacebookException error) {
 
-                textView.setText("Prisijungimas atšauktas");
+                textView.setText("Prisijungimas atšauktas"); // warningas dėl translate į kitas kalbas, ignoruojam
 
             }
         });
