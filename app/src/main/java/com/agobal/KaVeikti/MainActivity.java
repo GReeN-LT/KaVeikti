@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//bandau github
+//bandau github 2
 
         FacebookSdk.sdkInitialize(getApplicationContext());
 
