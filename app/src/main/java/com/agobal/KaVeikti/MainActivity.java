@@ -12,7 +12,7 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-
+//dartau
 //TODO : reikia sutvarkyt login, kad rodytų profilį, paskui galima bus imest kažkur po kitu activity
 
 //TODO : Pabandyt firebase integruot
