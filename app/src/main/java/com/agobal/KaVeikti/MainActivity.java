@@ -3,6 +3,7 @@ package com.agobal.KaVeikti;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.agobal.KaVeikti.R;
@@ -23,7 +24,7 @@ import com.facebook.login.widget.LoginButton;
 
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 //
     LoginButton loginButton;
     TextView textView;
@@ -53,7 +54,9 @@ public class MainActivity extends AppCompatActivity {
                 textView.setText("Ką Veikti?!");
                 LoginSekmingas = true;
 
-
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, SideMenu.class);
+                startActivity(intent);
                /*
                 if(AccessToken.getCurrentAccessToken() == null)
                 {
@@ -70,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                         "\n" + "\n Vartotojo Tokenas: " +loginResult.getAccessToken().getToken() );
               */
             }
+
 
             @Override
             public void onCancel() {
@@ -99,6 +103,10 @@ public class MainActivity extends AppCompatActivity {
         callbackManager.onActivityResult(requestCode,resultCode,data);
     }
 
+    @Override
+    public void onClick(View v) {
+        //daryt kazka
+    }
 
 
     //
