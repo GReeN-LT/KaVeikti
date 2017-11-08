@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LoginTest</string>
+    <string name="app_name">Test</string>
     <string name="facebook_app_id">131814504034952</string>
     <string name="title_activity_splash">Splash</string>
 </resources>
