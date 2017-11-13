@@ -1,4 +1,5 @@
 package com.agobal.KaVeikti;
+
 // Tik side manu branche
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -16,16 +17,21 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.firebase.analytics.FirebaseAnalytics;
 //dartau
-//TODO : reikia sutvarkyt login, kad rodytų profilį, paskui galima bus imest kažkur po kitu activity
 
-//TODO : Pabandyt firebase integruot
+
+//TODO : email login
+
+//TODO : Pabandyt firebase integruot DONE
 
 
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 //
+
+    private FirebaseAnalytics mFirebaseAnalytics;
     LoginButton loginButton;
     TextView textView;
     CallbackManager callbackManager;
@@ -41,6 +47,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //noinspection deprecation
         FacebookSdk.sdkInitialize(getApplicationContext());
 
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
         setContentView(R.layout.activity_main);
 
         loginButton = (LoginButton) findViewById(R.id.fb_login);
@@ -51,12 +60,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onSuccess(LoginResult loginResult) {
 
-                textView.setText("Ką Veikti?!");
+                textView.setText("Ką Veikti?");
                 LoginSekmingas = true;
 
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, SideMenu.class);
                 startActivity(intent);
+
+
                /*
                 if(AccessToken.getCurrentAccessToken() == null)
                 {

@@ -1,3 +1,4 @@
+
 package com.agobal.KaVeikti;
 
 import android.os.Bundle;
@@ -74,7 +75,10 @@ public class SideMenu extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_maps) {
-            // Handle the camera action
+            // Handle the maps action
+
+
+
         } else if (id == R.id.nav_event) {
 
         } else if (id == R.id.nav_history) {
