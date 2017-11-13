@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.agobal.KaVeikti.R;
@@ -42,6 +43,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
+
+/*
+        LoginButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(this, LoginActivity.class)
+                startActivity(intent);
+            }
+        });
+
+*/
+
+
 //bandau github 2
 
         //noinspection deprecation
@@ -52,6 +70,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         setContentView(R.layout.activity_main);
 
+        Button LoginButton = (Button) findViewById(R.id.LoginButton);
+
+        LoginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              // startActivity(new Intent(MainActivity.this,LoginActivity.class));
+            }
+        });
+
         loginButton = (LoginButton) findViewById(R.id.fb_login);
         textView = (TextView) findViewById(R.id.textView);
 
@@ -60,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onSuccess(LoginResult loginResult) {
 
-                textView.setText("Ką Veikti?");
+                textView.setText("Kraunama...");
                 LoginSekmingas = true;
 
                 try {
@@ -114,15 +141,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
+    public void onClick(View v)
+    {
+        Intent intent = new Intent();
+        intent.setClass(MainActivity.this, SideMenu.class);
+        startActivity(intent);
+
+
+    }
+     //onclick
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode,resultCode,data);
     }
 
-    @Override
-    public void onClick(View v) {
-        //daryt kazka
-    }
+
 
 
     //
