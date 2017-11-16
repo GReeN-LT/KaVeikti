@@ -97,11 +97,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+
+
+                /*
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, SideMenu.class);
                 startActivity(intent);
 
-
+*/
                /*
                 if(AccessToken.getCurrentAccessToken() == null)
                 {
@@ -142,6 +145,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+
+
+     //onclick
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode,resultCode,data);
+    }
+
     @Override
     public void onClick(View v)
     {
@@ -151,15 +164,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
-     //onclick
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode,resultCode,data);
-    }
-
-
 
 
     //

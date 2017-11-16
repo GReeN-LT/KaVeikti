@@ -32,8 +32,11 @@ public class LoginActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-            finish();
+            //TODO : zymiu vieta kur keist kur meta po login
+           // startActivity(new Intent(LoginActivity.this, SideMenu.class));
+            //finish();
+
+            //jei useris jau buvo prisilogines iškar meta main activity
         }
 
         // set the view now
@@ -62,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
+                startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
             }
         });
 
