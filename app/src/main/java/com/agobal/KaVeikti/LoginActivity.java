@@ -33,8 +33,8 @@ public class LoginActivity extends AppCompatActivity {
 
         if (auth.getCurrentUser() != null) {
             //TODO : zymiu vieta kur keist kur meta po login
-           // startActivity(new Intent(LoginActivity.this, SideMenu.class));
-            //finish();
+            startActivity(new Intent(LoginActivity.this, SideMenu.class));
+            finish();
 
             //jei useris jau buvo prisilogines iškar meta main activity
         }

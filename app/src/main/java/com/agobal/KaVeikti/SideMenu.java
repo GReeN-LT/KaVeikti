@@ -1,6 +1,7 @@
 
 package com.agobal.KaVeikti;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.design.widget.NavigationView;
@@ -74,6 +75,7 @@ public class SideMenu extends AppCompatActivity
 
         if (id == R.id.nav_maps) {
             // Handle the maps action
+            startActivity(new Intent(SideMenu.this, MapsActivity.class));
 
 
 

@@ -34,6 +34,9 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
+        <!--   <meta-data
+               android:name="com.google.android.gms.version"
+               android:value="@integer/google_play_services_version" />  z -->
 
         <activity
             android:name=".SideMenu"
@@ -49,13 +52,16 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyDUhYSB2uz9puX59ZkyJ7pZO2gsnVpaH4Y" /> <!-- pridėjau api key. z -->
 
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
         <activity android:name=".SignupActivity" />
-        <activity android:name=".ResetPasswordActivity"></activity>
+        <activity android:name=".ResetPasswordActivity" />
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps"></activity>
     </application>
 
 </manifest>
