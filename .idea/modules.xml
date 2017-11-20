@@ -4,7 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/KaVeikti.iml" filepath="$PROJECT_DIR$/KaVeikti.iml" />
       <module fileurl="file://C:\Users\zydru\projects\JavaProjektas\KaVeikti\KaVeikti.iml" filepath="C:\Users\zydru\projects\JavaProjektas\KaVeikti\KaVeikti.iml" />
+      <module fileurl="file://C:\projects\AndroidStudio\KaVeikti\KaVeikti.iml" filepath="C:\projects\AndroidStudio\KaVeikti\KaVeikti.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\projects\AndroidStudio\KaVeikti\app\app.iml" filepath="C:\projects\AndroidStudio\KaVeikti\app\app.iml" />
       <module fileurl="file://C:\Users\zydru\projects\JavaProjektas\KaVeikti\app\app.iml" filepath="C:\Users\zydru\projects\JavaProjektas\KaVeikti\app\app.iml" />
     </modules>
   </component>
