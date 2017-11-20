@@ -22,7 +22,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 //dartau
 
 
-//TODO : email login
+//TODO : email login DONE
 
 //TODO : Pabandyt firebase integruot DONE
 
