@@ -8,5 +8,5 @@
         android:title="@string/action_settings"
 
         app:showAsAction="never"
-        tools:title="Nustatymai" />
+        tools:title="Atsijungti" />
 </menu>
