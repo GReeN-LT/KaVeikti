@@ -93,24 +93,12 @@ public class SideMenu extends AppCompatActivity
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
-
-            
-
-// this listener will be called when there is change in firebase user session
-            FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
-                @Override
-                public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                    FirebaseUser user = firebaseAuth.getCurrentUser();
-                    if (user == null) {
-                        // user auth state is changed - user is null
-                        // launch login activity
-                        startActivity(new Intent(SideMenu.this, LoginActivity.class));
-                        finish();
-                    }
-                }
-            };
+//atsijungimas
+            startActivity(new Intent(SideMenu.this, LoginActivity.class));
+            FirebaseAuth.getInstance().signOut();
+            finish();
         }
-
+//atsijungimas
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
