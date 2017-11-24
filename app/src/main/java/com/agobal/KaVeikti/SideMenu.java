@@ -80,9 +80,6 @@ public class SideMenu extends AppCompatActivity
 
         if (id == R.id.nav_maps) {
             // Handle the maps action
-            startActivity(new Intent(SideMenu.this, MapsActivity.class));
-
-
 
         } else if (id == R.id.nav_event) {
 

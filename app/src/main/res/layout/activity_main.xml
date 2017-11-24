@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.agobal.KaVeikti.MainActivity">
+    tools:context="com.agobal.KaVeikti.MainActivity"
+    tools:layout_editor_absoluteY="81dp">
     <!-- buvo logintest.com.KaVeikti-->
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
@@ -19,30 +19,10 @@
         android:textAlignment="center"
 
         android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@+id/fb_login"
         app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.127" />
-
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/fb_login"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:paddingBottom="15dp"
-        android:paddingTop="15dp"
-        android:textAlignment="center"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.805" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/LoginButton"
@@ -50,15 +30,14 @@
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/com_facebook_button_background"
-        android:text="Prisijungti"
         android:radius="100dp"
+        android:text="Prisijungti"
         android:textColor="@color/btn_login_bg"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.661" />
+        app:layout_constraintVertical_bias="0.774" />
 
 
 </android.support.constraint.ConstraintLayout>
