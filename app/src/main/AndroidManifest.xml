@@ -58,8 +58,10 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".SignupActivity" />
-        <activity android:name=".ResetPasswordActivity" />
+        <activity android:name=".SignupActivity"
+            android:parentActivityName=".LoginActivity" />
+        <activity android:name=".ResetPasswordActivity"
+            android:parentActivityName=".LoginActivity"/>
         <activity android:name=".MeniuActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>

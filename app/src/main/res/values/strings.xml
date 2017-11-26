@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">KaVeikti</string>
+    <string name="app_name">Ka Veikti?</string>
     <string name="facebook_app_id">131814504034952</string>
     <string name="title_activity_splash">Splash</string>
     <string name="title_activity_side_menu">SideMenu</string>
@@ -10,8 +10,8 @@
     <string name="action_settings">Atsijungti</string>
     <string name="title_activity_maps">Map</string>
 
-    <string name="action_sign_in_short">Register</string>
-    <string name="email">Email</string>
+    <string name="action_sign_in_short">Registracija</string>
+    <string name="email">El. paštas</string>
     <string name="minimum_password">Slaptažodis per trumpas, įveskite bent 6 simbolių slaptažodį!</string>
     <string name="auth_failed">Paskyra nerasta, patikrinkite El. pašto adresą ir slaptažodį!</string>
     <string name="change_email">Change Email</string>
@@ -21,8 +21,8 @@
     <string name="new_pass">New Password</string>
     <string name="title_activity_profile">Firebase</string>
     <string name="title_activity_login">Prisijungimas</string>
-    <string name="hint_email">Email</string>
-    <string name="hint_password">Password</string>
+    <string name="hint_email">El. paštas</string>
+    <string name="hint_password">Slaptažodis</string>
     <string name="hint_name">Fullname</string>
     <string name="btn_login">LOGIN</string>
     <string name="btn_link_to_register">Not a member? Get registered in Firebase now!</string>
