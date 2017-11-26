@@ -15,7 +15,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 //TODO : Pabandyt firebase integruot DONE
 
-
+//TODO : pagal tutoriala: jo Start_actv yra mūsų main, o jo main- mūsų meniu actv
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v)
     {
         Intent intent = new Intent();
-        intent.setClass(MainActivity.this, SideMenu.class);
+        intent.setClass(MainActivity.this, MeniuActivity.class);
         startActivity(intent);
 
 
