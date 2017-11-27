@@ -17,7 +17,8 @@
         app:layout_constraintBottom_toTopOf="@+id/settings_display_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
         android:id="@+id/settings_display_name"
@@ -44,25 +45,22 @@
 
     <Button
         android:id="@+id/settings_status_button"
-        android:layout_width="139dp"
-        android:layout_height="52dp"
-        android:layout_marginBottom="43dp"
+        android:layout_width="127dp"
+        android:layout_height="43dp"
         android:background="@color/colorAccent"
+
         android:text="Change Status"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/settings_image_button" />
+        tools:layout_editor_absoluteX="129dp"
+        tools:layout_editor_absoluteY="437dp" />
 
     <Button
         android:id="@+id/settings_image_button"
-        android:layout_width="148dp"
-        android:layout_height="55dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_width="128dp"
+        android:layout_height="48dp"
         android:text="Change Image"
-        app:layout_constraintBottom_toTopOf="@+id/settings_status_button"
-        app:layout_constraintEnd_toEndOf="@+id/settings_status"
-        app:layout_constraintTop_toBottomOf="@+id/settings_status" />
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="389dp" />
 
 </android.support.constraint.ConstraintLayout>
