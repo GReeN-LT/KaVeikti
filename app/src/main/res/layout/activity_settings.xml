@@ -23,7 +23,7 @@
         android:id="@+id/settings_display_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="7dp"
+        android:layout_marginBottom="8dp"
         android:text="Display Name"
         android:textSize="25dp"
         app:layout_constraintBottom_toTopOf="@+id/settings_status"
