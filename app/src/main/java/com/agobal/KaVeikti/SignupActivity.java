@@ -16,6 +16,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -25,6 +30,9 @@ public class SignupActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private Toolbar mToolbar;
 //display name tvarkyt
+
+    private DatabaseReference mDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,8 +108,31 @@ public class SignupActivity extends AppCompatActivity {
                                     Toast.makeText(SignupActivity.this, "Prisijungti nepavyko." + task.getException(),
                                             Toast.LENGTH_SHORT).show();
                                 } else {
-                                    startActivity(new Intent(SignupActivity.this, LoginActivity.class));
-                                    finish();
+
+                                    FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
+                                    String uid = current_user.getUid();
+                                    mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+
+                                    HashMap<String, String> userMap = new HashMap<>();
+                                    userMap.put("name", DisplayName.getText().toString());
+                                    userMap.put("status", "Sveiki, aš naudojusi KaVeikti appsu");
+                                    userMap.put("image", "default");
+                                    userMap.put("thumb_image", "default");
+
+                                    mDatabase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if(task.isSuccessful())
+                                            {
+                                                startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+                                                finish();
+                                            }
+                                        }
+                                    });
+
+
+
+
                                 }
                             }
                         });

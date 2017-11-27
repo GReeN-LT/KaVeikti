@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "363387242255-5e7d3f4eb5g0aeq66qqr1hbhi0v83dru.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.agobal.KaVeikti",
+            "certificate_hash": "4621a358878c68530ca5ad3098b54cc1e88ac649"
+          }
+        },
+        {
           "client_id": "363387242255-d5a3uulbhid2isravja94upcosrm1hn7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

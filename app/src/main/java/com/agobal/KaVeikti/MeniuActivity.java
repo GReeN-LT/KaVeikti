@@ -83,6 +83,11 @@ public class MeniuActivity extends AppCompatActivity {
             sendToStart();
         }
 
+        if(item.getItemId() == R.id.main_settings_btn){
+            Intent settingsIntent = new Intent(MeniuActivity.this, SettingsActivity.class);
+            startActivity(settingsIntent);
+
+        }
         return true;
     }
 
