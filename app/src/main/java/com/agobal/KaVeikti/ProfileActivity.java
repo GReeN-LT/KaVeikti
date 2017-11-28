@@ -31,7 +31,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private ImageView mProfileImage;
     private TextView mProfileName, mProfileStatus, mProfileFriendsCount;
-    private Button mProfileSendReqBtn;
+    private Button mProfileSendReqBtn, mDeclineBtn;
 
     private DatabaseReference mUsersDatabase;
     private DatabaseReference mFriendRequestDatabase;
@@ -65,8 +65,18 @@ public class ProfileActivity extends AppCompatActivity {
         mProfileStatus = (TextView) findViewById(R.id.profile_status);
         mProfileFriendsCount = (TextView) findViewById(R.id.profile_totalFriends);
         mProfileSendReqBtn = (Button) findViewById(R.id.profile_send_req_btn);
+        mDeclineBtn = (Button) findViewById(R.id.profile_decline_btn);
 
         mCurrent_state = "not_friends";
+        // testing
+
+        mDeclineBtn.setVisibility(View.INVISIBLE);
+        mDeclineBtn.setEnabled(false);
+
+        // testing end
+        
+
+
 
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setTitle("Krauname vartotojo informaciją");
@@ -99,10 +109,15 @@ public class ProfileActivity extends AppCompatActivity {
                             if(req_type.equals("recieved")){
                                 mCurrent_state = "req_recieved";
                                 mProfileSendReqBtn.setText("Priimti į draugus");
+                                mDeclineBtn.setVisibility(View.VISIBLE);
+                                mDeclineBtn.setEnabled(true);
+
                             }else if(req_type.equals("sent"))
                             {
                                 mCurrent_state = "req_sent";
                                 mProfileSendReqBtn.setText("Atšauktį pakvietimą");
+                                mDeclineBtn.setVisibility(View.INVISIBLE);
+                                mDeclineBtn.setEnabled(false);
                             }
                             mProgressDialog.dismiss();
                         }else{
@@ -114,6 +129,9 @@ public class ProfileActivity extends AppCompatActivity {
                                         // he is already firend
                                         mCurrent_state = "friends";
                                         mProfileSendReqBtn.setText("Ištrinti iš draugų");
+
+                                        mDeclineBtn.setVisibility(View.INVISIBLE);
+                                        mDeclineBtn.setEnabled(false);
                                     }
 
                                     mProgressDialog.dismiss();
@@ -167,7 +185,11 @@ public class ProfileActivity extends AppCompatActivity {
 
                                         mCurrent_state = "req_sent";
                                         mProfileSendReqBtn.setText("Atšaukti pakvietimą");
-                                        Toast.makeText(ProfileActivity.this, "Pakvietimas išsiųstas", Toast.LENGTH_SHORT).show();
+
+                                        mDeclineBtn.setVisibility(View.INVISIBLE);
+                                        mDeclineBtn.setEnabled(false);
+
+                                    //    Toast.makeText(ProfileActivity.this, "Pakvietimas išsiųstas", Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }
@@ -191,7 +213,11 @@ public class ProfileActivity extends AppCompatActivity {
                                 public void onSuccess(Void aVoid) {
                                     mProfileSendReqBtn.setEnabled(true);
                                     mCurrent_state = "not_friends";
+
                                     mProfileSendReqBtn.setText("Pakviestį į draugus");
+
+                                    mDeclineBtn.setVisibility(View.INVISIBLE);
+                                    mDeclineBtn.setEnabled(false);
                                 }
                             });
                         }
@@ -220,6 +246,10 @@ public class ProfileActivity extends AppCompatActivity {
                                                                     mProfileSendReqBtn.setEnabled(true);
                                                                     mCurrent_state = "friends";
                                                                     mProfileSendReqBtn.setText("Ištrinti iš draugų");
+
+                                                                    mDeclineBtn.setVisibility(View.INVISIBLE);
+                                                                    mDeclineBtn.setEnabled(false);
+
                                                                 }
                                                             });
                                                         }
