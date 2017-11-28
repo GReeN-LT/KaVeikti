@@ -88,6 +88,11 @@ public class MeniuActivity extends AppCompatActivity {
             startActivity(settingsIntent);
 
         }
+        if(item.getItemId() == R.id.main_users_btn)
+        {
+            Intent settingsIntent = new Intent(MeniuActivity.this, UsersActivity.class);
+            startActivity(settingsIntent);
+        }
         return true;
     }
 
