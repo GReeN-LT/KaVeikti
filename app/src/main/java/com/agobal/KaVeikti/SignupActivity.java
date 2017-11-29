@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.HashMap;
 
@@ -30,6 +31,8 @@ public class SignupActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private Toolbar mToolbar;
 //display name tvarkyt
+
+
 
     private DatabaseReference mDatabase;
 
@@ -113,11 +116,17 @@ public class SignupActivity extends AppCompatActivity {
                                     String uid = current_user.getUid();
                                     mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
 
+                                //    String current_user_id = auth.getCurrentUser().getUid();
+                                    String deviceToken = FirebaseInstanceId.getInstance().getToken();
+
+
                                     HashMap<String, String> userMap = new HashMap<>();
                                     userMap.put("name", DisplayName.getText().toString());
                                     userMap.put("status", "Sveiki, aš naudojusi KaVeikti appsu");
                                     userMap.put("image", "default");
                                     userMap.put("thumb_image", "default");
+                                    userMap.put("device_token", deviceToken);
+
 
                                     mDatabase.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
@@ -125,7 +134,7 @@ public class SignupActivity extends AppCompatActivity {
                                             if(task.isSuccessful())
                                             {
                                                 startActivity(new Intent(SignupActivity.this, LoginActivity.class));
-                                                finish();
+                                               finish();
                                             }
                                         }
                                     });

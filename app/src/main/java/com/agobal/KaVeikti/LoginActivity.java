@@ -13,9 +13,13 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -24,12 +28,20 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private Button btnSignup, btnLogin, btnReset;
 
+    // Notif
+    private DatabaseReference mUserDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
+
+
+        // notif
+        mUserDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+
 
         if (auth.getCurrentUser() != null) {
             //TODO : zymiu vieta kur keist kur meta po login
@@ -104,9 +116,23 @@ public class LoginActivity extends AppCompatActivity {
                                         Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
                                     }
                                 } else {
-                                    Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
-                                    startActivity(intent);
-                                    finish();
+                                    // Notifications
+                                    String current_user_id = auth.getCurrentUser().getUid();
+                                    String deviceToken = FirebaseInstanceId.getInstance().getToken();
+
+                                    mUserDatabase.child(current_user_id).child("device_token").setValue(deviceToken).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+
+                                            // buvo
+                                            Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+                                            startActivity(intent);
+                                            finish();
+
+                                        }
+                                    });
+
+
                                 }
                             }
                         });

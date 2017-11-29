@@ -26,6 +26,8 @@ import com.squareup.picasso.Picasso;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -36,9 +38,13 @@ public class ProfileActivity extends AppCompatActivity {
     private DatabaseReference mUsersDatabase;
     private DatabaseReference mFriendRequestDatabase;
     private DatabaseReference mFriendDatabase;
+    private DatabaseReference mNotificationDatabase;
 
-
+    private DatabaseReference mRootRef;
+    //
+    @SuppressWarnings("deprecation")
     private ProgressDialog mProgressDialog;
+
 
     private String mCurrent_state;
 
@@ -54,11 +60,15 @@ public class ProfileActivity extends AppCompatActivity {
 
         final String user_id = getIntent().getStringExtra("user_id");
 
+        mRootRef = FirebaseDatabase.getInstance().getReference();
+
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(user_id);
         mFriendRequestDatabase = FirebaseDatabase.getInstance().getReference().child("Friend_req");
         mFriendDatabase = FirebaseDatabase.getInstance().getReference().child("Friends");
-        mCurrent_user = FirebaseAuth.getInstance().getCurrentUser();
+        mNotificationDatabase = FirebaseDatabase.getInstance().getReference().child("notifications");
 
+
+        mCurrent_user = FirebaseAuth.getInstance().getCurrentUser();
 
         mProfileImage = (ImageView) findViewById(R.id.profile_image);
         mProfileName = (TextView) findViewById(R.id.profile_displayName);
@@ -68,23 +78,15 @@ public class ProfileActivity extends AppCompatActivity {
         mDeclineBtn = (Button) findViewById(R.id.profile_decline_btn);
 
         mCurrent_state = "not_friends";
-        // testing
 
         mDeclineBtn.setVisibility(View.INVISIBLE);
         mDeclineBtn.setEnabled(false);
-
-        // testing end
-        
-
-
 
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setTitle("Krauname vartotojo informaciją");
         mProgressDialog.setMessage("Prašome palaukti kol užkrausime vartotojo informaciją");
         mProgressDialog.setCanceledOnTouchOutside(false);
         mProgressDialog.show();
-
-
 
 
         mUsersDatabase.addValueEventListener(new ValueEventListener() {
@@ -103,29 +105,26 @@ public class ProfileActivity extends AppCompatActivity {
                 mFriendRequestDatabase.child(mCurrent_user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.hasChild(user_id))
-                        {
+                        if (dataSnapshot.hasChild(user_id)) {
                             String req_type = dataSnapshot.child(user_id).child("request_type").getValue().toString();
-                            if(req_type.equals("recieved")){
+                            if (req_type.equals("recieved")) {
                                 mCurrent_state = "req_recieved";
                                 mProfileSendReqBtn.setText("Priimti į draugus");
                                 mDeclineBtn.setVisibility(View.VISIBLE);
                                 mDeclineBtn.setEnabled(true);
 
-                            }else if(req_type.equals("sent"))
-                            {
+                            } else if (req_type.equals("sent")) {
                                 mCurrent_state = "req_sent";
                                 mProfileSendReqBtn.setText("Atšauktį pakvietimą");
                                 mDeclineBtn.setVisibility(View.INVISIBLE);
                                 mDeclineBtn.setEnabled(false);
                             }
                             mProgressDialog.dismiss();
-                        }else{
+                        } else {
                             mFriendDatabase.child(mCurrent_user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
-                                    if(dataSnapshot.hasChild(user_id))
-                                    {
+                                    if (dataSnapshot.hasChild(user_id)) {
                                         // he is already firend
                                         mCurrent_state = "friends";
                                         mProfileSendReqBtn.setText("Ištrinti iš draugų");
@@ -154,14 +153,13 @@ public class ProfileActivity extends AppCompatActivity {
                 });
 
 
-
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        }); //  mUsersDatabase.addValueEventListener end
 
         mProfileSendReqBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,40 +169,38 @@ public class ProfileActivity extends AppCompatActivity {
 
 
                 // ----------------- NOT FRIENDS STATE -------------
-                if(mCurrent_state.equals("not_friends")){
-                    mFriendRequestDatabase.child(mCurrent_user.getUid()).child(user_id).child("request_type").
-                            setValue("sent").addOnCompleteListener(new OnCompleteListener<Void>() {
+                if (mCurrent_state.equals("not_friends")) {
+
+                    DatabaseReference newNotificationref = mRootRef.child("notifications").child(user_id).push();
+                    String newNotificationId = newNotificationref.getKey();
+
+                    HashMap<String, String> notificationData = new HashMap<>();
+                    notificationData.put("from", mCurrent_user.getUid());
+                    notificationData.put("type", "request");
+
+
+                    Map requestMap = new HashMap();
+                    requestMap.put("Friend_req/" + mCurrent_user.getUid() + "/" + user_id + "/request_type", "sent");
+                    requestMap.put("Friend_req/" + user_id + "/" + mCurrent_user.getUid() + "/request_type", "recieved");
+                    requestMap.put("notifications/" + user_id + "/" + newNotificationId, notificationData);
+
+                    mRootRef.updateChildren(requestMap, new DatabaseReference.CompletionListener() {
                         @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-
-                            if (task.isSuccessful()){
-                                mFriendRequestDatabase.child(user_id).child(mCurrent_user.getUid()).child("request_type")
-                                        .setValue("recieved").addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-
-                                        mCurrent_state = "req_sent";
-                                        mProfileSendReqBtn.setText("Atšaukti pakvietimą");
-
-                                        mDeclineBtn.setVisibility(View.INVISIBLE);
-                                        mDeclineBtn.setEnabled(false);
-
-                                    //    Toast.makeText(ProfileActivity.this, "Pakvietimas išsiųstas", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
+                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                            // for now
+                            if (databaseError != null) {
+                                Toast.makeText(ProfileActivity.this, "Klaida siunčiant pakvietimą", Toast.LENGTH_SHORT).show();
                             }
-                            else {
-                                Toast.makeText(ProfileActivity.this, "Nepavyko nusiųsti pakvietimo", Toast.LENGTH_SHORT).show();
-                            }
-
                             mProfileSendReqBtn.setEnabled(true);
+                            mCurrent_state = "req_sent";
+                            mProfileSendReqBtn.setText("Atšaukti pakvietimą");
+                            // ***
                         }
                     });
-                }
+                } // NOT FRIENDS STATE end
                 // ----------------- CANCEL REQUEST STATE -------------
 
-                if(mCurrent_state.equals("req_sent"))
-                {
+                if (mCurrent_state.equals("req_sent")) {
                     mFriendRequestDatabase.child(mCurrent_user.getUid()).child(user_id).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
@@ -222,52 +218,69 @@ public class ProfileActivity extends AppCompatActivity {
                             });
                         }
                     });
-                }
+                } // Cancel Request End
                 // ------------- REQ RECIEVED STATE -----------
-                if(mCurrent_state.equals("req_recieved"))
-                {
+                if (mCurrent_state.equals("req_recieved")) {
                     final String currentDate = DateFormat.getDateTimeInstance().format(new Date());
-                    mFriendDatabase.child(mCurrent_user.getUid()).child(user_id).setValue(currentDate)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    mFriendDatabase.child(user_id).child(mCurrent_user.getUid()).setValue(currentDate)
-                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void aVoid) {
 
-                                                    //
-                                                    mFriendRequestDatabase.child(mCurrent_user.getUid()).child(user_id).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                        @Override
-                                                        public void onSuccess(Void aVoid) {
-                                                            mFriendRequestDatabase.child(user_id).child(mCurrent_user.getUid()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                                @Override
-                                                                public void onSuccess(Void aVoid) {
-                                                                    mProfileSendReqBtn.setEnabled(true);
-                                                                    mCurrent_state = "friends";
-                                                                    mProfileSendReqBtn.setText("Ištrinti iš draugų");
+                    Map friendsMap = new HashMap();
+                    friendsMap.put("Friends/" + mCurrent_user.getUid() + "/" + user_id + "/date", currentDate);
+                    friendsMap.put("Friends/" + user_id + "/" + mCurrent_user.getUid() + "/date", currentDate);
 
-                                                                    mDeclineBtn.setVisibility(View.INVISIBLE);
-                                                                    mDeclineBtn.setEnabled(false);
-
-                                                                }
-                                                            });
-                                                        }
-                                                    });//
-
-                                                }
-                                            });
-
-                                }
-                            });
-                }
+                    friendsMap.put("Friend_req/" + mCurrent_user.getUid() + "/" + user_id, null);
+                    friendsMap.put("Friend_req/" + user_id + "/" + mCurrent_user.getUid(), null);
 
 
+                    mRootRef.updateChildren(friendsMap, new DatabaseReference.CompletionListener() {
+                        @Override
+                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+
+                            if (databaseError == null) {
+                                mProfileSendReqBtn.setEnabled(true);
+                                mCurrent_state = "friends";
+                                mProfileSendReqBtn.setText("Pašalinti iš draugų");
+
+                                mDeclineBtn.setVisibility(View.VISIBLE);
+                                mDeclineBtn.setEnabled(false);
+                            } else {
+                                String error = databaseError.getMessage();
+                                Toast.makeText(ProfileActivity.this, error, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                } // Req Recieved end
+                // States end. kidding end is not here
+                // --------- UNFRIENDS ----------
+                if (mCurrent_state.equals("friends")) {
+                    Map unfriendMap = new HashMap();
+                    unfriendMap.put("Friends/" + mCurrent_user.getUid() + "/" + user_id, null);
+                    unfriendMap.put("Friends/" + user_id + "/" + mCurrent_user.getUid(), null);
+
+                    mRootRef.updateChildren(unfriendMap, new DatabaseReference.CompletionListener() {
+                        @Override
+                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+
+                            if (databaseError == null) {
+
+                                mCurrent_state = "not_friends";
+                                mProfileSendReqBtn.setText("Pakviesti į draugus");
+
+                                mDeclineBtn.setVisibility(View.VISIBLE);
+                                mDeclineBtn.setEnabled(false);
+                            } else {
+                                String error = databaseError.getMessage();
+                                Toast.makeText(ProfileActivity.this, error, Toast.LENGTH_SHORT).show();
+                            }
+                            mProfileSendReqBtn.setEnabled(true);
+                        }
+                    });
+
+                }// Unfirends END
 
 
-                // States end
+                //      hm šito tikrai reikia skliaustelio ?
             }
+        }); // mProfileSendReqBtn listener end
 
-        });
     }
 }
