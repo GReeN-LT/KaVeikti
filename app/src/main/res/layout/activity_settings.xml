@@ -52,6 +52,7 @@
         android:background="@color/colorAccent"
         android:text="Pakeisti profilio statusą"
         android:textAlignment="center"
+        android:textColor="@color/white"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settings_image_button" />
@@ -65,6 +66,7 @@
         android:fitsSystemWindows="false"
         android:gravity="center"
         android:text="Pakeisti profilio nuotrauką"
+        android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/settings_status"
         tools:layout_editor_absoluteX="8dp" />
 </android.support.constraint.ConstraintLayout>
