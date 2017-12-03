@@ -61,6 +61,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private ProgressDialog mProgressDialog;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -152,6 +153,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -273,4 +275,5 @@ public class SettingsActivity extends AppCompatActivity {
         }
         return randomStringBuilder.toString();
     }
+
 }

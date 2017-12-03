@@ -1,6 +1,7 @@
 package com.agobal.KaVeikti;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -89,6 +90,7 @@ public class ProfileActivity extends AppCompatActivity {
         mProgressDialog.show();
 
 
+
         mUsersDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -155,11 +157,15 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
 
+
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         }); //  mUsersDatabase.addValueEventListener end
+
+
 
         mProfileSendReqBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -282,5 +288,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         }); // mProfileSendReqBtn listener end
 
-    }
+     }
+
 }
