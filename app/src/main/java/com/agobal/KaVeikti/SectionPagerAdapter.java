@@ -28,8 +28,8 @@ class SectionPagerAdapter extends FragmentPagerAdapter{
 
 
             case 2:
-                Draugai draugaiFrag =new Draugai();
-                return draugaiFrag;
+                FriendsFragment friendsFragment = new FriendsFragment();
+                return friendsFragment;
 
             default:
                 return null;

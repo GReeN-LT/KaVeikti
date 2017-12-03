@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric' // for crachlytics
 
 android {
     compileSdkVersion 26
@@ -50,6 +52,11 @@ dependencies {
     compile 'com.firebaseui:firebase-ui-database:2.3.0'
     compile 'id.zelory:compressor:2.1.0'
     compile 'com.squareup.okhttp:okhttp:2.5.0'
+    // for crachlytics
+    compile('com.crashlytics.sdk.android:crashlytics:2.7.1@aar') {
+        transitive = true
+    }
+    compile 'com.google.firebase:firebase-core:11.0.4'
 
 
 }
