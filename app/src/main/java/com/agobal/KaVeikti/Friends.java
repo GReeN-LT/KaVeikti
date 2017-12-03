@@ -12,7 +12,7 @@ class Friends {
     public Friends() {
     }
 
-    public Friends(String date) {
+    public Friends(String date){
         this.date = date;
         Log.d("test04", date);
     }
