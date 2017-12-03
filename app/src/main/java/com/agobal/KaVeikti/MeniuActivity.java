@@ -12,6 +12,8 @@ import android.view.MenuItem;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MeniuActivity extends AppCompatActivity {
 
@@ -20,6 +22,8 @@ public class MeniuActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
     private SectionPagerAdapter mSectionsPagerAdapter;
+
+    private DatabaseReference mUserRef;
 
     private TabLayout mTabLayout;
 
@@ -34,6 +38,8 @@ public class MeniuActivity extends AppCompatActivity {
         mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
         //getSupportActionBar().setTitle("Meniu");
+
+        mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
 
         //tabs
         mViewPager = (ViewPager) findViewById(R.id.main_tabPager);
@@ -59,9 +65,18 @@ public class MeniuActivity extends AppCompatActivity {
         if(currentUser == null)
         {
             sendToStart();
+        } else {
+
+            mUserRef.child("online").setValue(true);
+
         }
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mUserRef.child("online").setValue(false);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
