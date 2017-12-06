@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "363387242255",
+    "firebase_url": "https://kaveikti-2f2d6.firebaseio.com",
+    "project_id": "kaveikti-2f2d6",
+    "storage_bucket": "kaveikti-2f2d6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:363387242255:android:576b90a4944c7feb",
+        "android_client_info": {
+          "package_name": "com.agobal.KaVeikti"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "363387242255-d5a3uulbhid2isravja94upcosrm1hn7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.agobal.KaVeikti",
+            "certificate_hash": "dc9d45f573c9ce6a1b07d021e4249108f5e7af78"
+          }
+        },
+        {
+          "client_id": "363387242255-uvji1rk85fqam19roq701nhj8nm90cs1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfiOB27HGwCrMeP57XNVmMXjFiFCksgwA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "363387242255-uvji1rk85fqam19roq701nhj8nm90cs1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
