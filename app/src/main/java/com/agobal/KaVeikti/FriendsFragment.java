@@ -92,12 +92,12 @@ public class FriendsFragment extends Fragment {
                 mUsersDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        String userName = dataSnapshot.child("name").getValue().toString();
+                        final String userName = dataSnapshot.child("name").getValue().toString();
                         String userThumb = dataSnapshot.child("thumb_image").getValue().toString();
 
 
                         if(dataSnapshot.hasChild("online")) {
-                            Boolean userOnline = (boolean) dataSnapshot.child("online").getValue();
+                            String userOnline = dataSnapshot.child("online").getValue().toString();
                             friendsViewHolder.setUserOnline(userOnline);
                         }
 
@@ -124,6 +124,7 @@ public class FriendsFragment extends Fragment {
                                         if (i == 1){
                                             Intent chatIntent = new Intent(getContext(), ChatActivity.class);
                                             chatIntent.putExtra("user_id", list_user_id);
+                                            chatIntent.putExtra("user_name", userName);
                                             startActivity(chatIntent);
                                         }
                                     }
@@ -144,7 +145,7 @@ public class FriendsFragment extends Fragment {
         };
 
 
-          mFriendsList.setAdapter(friendsRecyclerAdapter);
+        mFriendsList.setAdapter(friendsRecyclerAdapter);
 
 
 
@@ -178,11 +179,11 @@ public class FriendsFragment extends Fragment {
             Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.default_avatar).into(usersImageView);
         }
 
-        public void setUserOnline(boolean online_status) {
+        public void setUserOnline(String online_status) {
 
             ImageView userOnlineView = (ImageView) mView.findViewById(R.id.user_single_online_icon);
 
-            if(online_status == true ){
+            if(online_status.equals("true") ){
                 userOnlineView.setVisibility(View.VISIBLE);
             } else {
                 userOnlineView.setVisibility(View.INVISIBLE);

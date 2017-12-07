@@ -17,6 +17,8 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 //TODO : pagal tutoriala: jo Start_actv yra mūsų main, o jo main- mūsų meniu actv
 
+//TODO: 27 TUT - 17:42 avatarke prie vardo
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 //

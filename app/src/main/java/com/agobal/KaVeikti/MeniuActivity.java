@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 
 public class MeniuActivity extends AppCompatActivity {
 
@@ -67,7 +68,7 @@ public class MeniuActivity extends AppCompatActivity {
             sendToStart();
         } else {
 
-            mUserRef.child("online").setValue(true);
+            mUserRef.child("online").setValue("true");
 
         }
     }
@@ -80,7 +81,8 @@ public class MeniuActivity extends AppCompatActivity {
 
         if(currentUser != null)
         {
-            mUserRef.child("online").setValue(false);
+            mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
+
         }
 
     }
