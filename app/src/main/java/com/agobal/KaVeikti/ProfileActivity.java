@@ -54,9 +54,9 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        getWindow().requestFeature(Window.FEATURE_ACTION_BAR); // Removes app bar
+     //   getWindow().requestFeature(Window.FEATURE_ACTION_BAR); // Removes app bar
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide(); //  Removes app  bar also
+     //   getSupportActionBar().hide(); //  Removes app  bar also
         setContentView(R.layout.activity_profile);
 
         final String user_id = getIntent().getStringExtra("user_id");
