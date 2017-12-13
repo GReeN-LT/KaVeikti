@@ -18,13 +18,21 @@
         android:id="@+id/message_text_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/message_profile_layout"
-        android:layout_marginLeft="14dp"
-        android:layout_marginStart="14dp"
+        android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/message_profile_layout"
         android:layout_toRightOf="@+id/message_profile_layout"
         android:background="@drawable/message_text_background"
         android:padding="10dp"
         android:text="TextView"
         android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/name_text_layout"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/message_profile_layout"
+        android:text="TextView" />
+
 </RelativeLayout>

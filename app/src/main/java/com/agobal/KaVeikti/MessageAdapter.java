@@ -39,6 +39,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     public class MessageViewHolder extends RecyclerView.ViewHolder{
         public TextView messageText;
         public CircleImageView profileImage;
+        public TextView displayName;
 
         public MessageViewHolder(View view){
             super(view);
@@ -46,7 +47,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
             messageText = (TextView)view.findViewById(R.id.message_text_layout);
             profileImage = (CircleImageView)view.findViewById(R.id.message_profile_layout);
-
+            displayName = (TextView) view.findViewById(R.id.name_text_layout);
         }
     }
 

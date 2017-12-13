@@ -38,6 +38,7 @@ public class FriendsFragment extends Fragment {
     private RecyclerView mFriendsList;
     private DatabaseReference mFriendsDatabase;
     private DatabaseReference mUsersDatabase;
+
     private FirebaseAuth mAuth;
 
     private String mCurrent_user_id;
@@ -78,18 +79,24 @@ public class FriendsFragment extends Fragment {
 
         super.onStart();
         FirebaseRecyclerAdapter<Friends, FriendsViewHolder> friendsRecyclerAdapter = new FirebaseRecyclerAdapter<Friends, FriendsViewHolder>(
+
                 Friends.class,
                 R.layout.users_single_layout,
                 FriendsViewHolder.class,
                 mFriendsDatabase
+
         ) {
             @Override
             protected void populateViewHolder(final FriendsViewHolder friendsViewHolder, Friends friends, int i) {
+
                 friendsViewHolder.setDate(friends.getDate());
 
                 final String list_user_id = getRef(i).getKey();
 
-                mUsersDatabase.child(list_user_id).addValueEventListener(new ValueEventListener() {
+                mUsersDatabase.child(list_user_id).addValueEventListener(new ValueEventListener()
+
+
+                {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         final String userName = dataSnapshot.child("name").getValue().toString();

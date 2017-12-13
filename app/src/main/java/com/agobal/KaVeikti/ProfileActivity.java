@@ -124,6 +124,7 @@ public class ProfileActivity extends AppCompatActivity {
                             if (req_type.equals("recieved")) {
                                 mCurrent_state = "req_recieved";
                                 mProfileSendReqBtn.setText("Priimti į draugus");
+
                                 mDeclineBtn.setVisibility(View.VISIBLE);
                                 mDeclineBtn.setEnabled(true);
 
