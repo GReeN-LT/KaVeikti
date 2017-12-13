@@ -39,7 +39,11 @@ public class KaveiktiChat extends Application{
         Picasso.setSingletonInstance(built);
 
         mAuth= FirebaseAuth.getInstance();
-        mUserDatabase =  FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+        if(mAuth.getCurrentUser() != null)
+        {
+            mUserDatabase =  FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+
+
 
         mUserDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -57,5 +61,7 @@ public class KaveiktiChat extends Application{
 
             }
         });
+
+        }
     }
 }

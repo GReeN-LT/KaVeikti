@@ -40,7 +40,7 @@ public class ProfileActivity extends AppCompatActivity {
     private DatabaseReference mFriendRequestDatabase;
     private DatabaseReference mFriendDatabase;
     private DatabaseReference mNotificationDatabase;
-
+//iu
     private DatabaseReference mRootRef;
     //
     @SuppressWarnings("deprecation")
@@ -54,9 +54,9 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        getWindow().requestFeature(Window.FEATURE_ACTION_BAR); // Removes app bar
+        //getWindow().requestFeature(Window.FEATURE_ACTION_BAR); // Removes app bar
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide(); //  Removes app  bar also
+       // getSupportActionBar().hide(); //  Removes app  bar also
         setContentView(R.layout.activity_profile);
 
         final String user_id = getIntent().getStringExtra("user_id");
@@ -103,6 +103,16 @@ public class ProfileActivity extends AppCompatActivity {
 
                 Picasso.with(ProfileActivity.this).load(image).placeholder(R.drawable.default_avatar).into(mProfileImage);
 
+                if(mCurrent_user.getUid().equals(user_id)){
+
+                    mDeclineBtn.setEnabled(false);
+                    mDeclineBtn.setVisibility(View.INVISIBLE);
+
+                    mProfileSendReqBtn.setEnabled(false);
+                    mProfileSendReqBtn.setVisibility(View.INVISIBLE);
+
+                }
+
                 //--------FRIENDS LIST / REQUEST FREATURE ----------
                 mFriendRequestDatabase.child(mCurrent_user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -123,6 +133,8 @@ public class ProfileActivity extends AppCompatActivity {
                             }
                             mProgressDialog.dismiss();
                         } else {
+
+
                             mFriendDatabase.child(mCurrent_user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -197,9 +209,13 @@ public class ProfileActivity extends AppCompatActivity {
                             if (databaseError != null) {
                                 Toast.makeText(ProfileActivity.this, "Klaida siunčiant pakvietimą", Toast.LENGTH_SHORT).show();
                             }
-                            mProfileSendReqBtn.setEnabled(true);
-                            mCurrent_state = "req_sent";
-                            mProfileSendReqBtn.setText("Atšaukti pakvietimą");
+
+                            else {
+
+                                mCurrent_state = "req_sent";
+                                mProfileSendReqBtn.setText("Atšaukti pakvietimą");
+                            }
+                                mProfileSendReqBtn.setEnabled(true);
                             // ***
                         }
                     });
