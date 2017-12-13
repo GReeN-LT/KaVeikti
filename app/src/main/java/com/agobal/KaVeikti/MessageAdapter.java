@@ -2,9 +2,12 @@ package com.agobal.KaVeikti;
 
 import java.util.List;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.*;
 import android.widget.*;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -15,6 +18,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder>{
 
     private List<Messages> mMessageList;
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
 
     public MessageAdapter(List<Messages> mMessageList) {
         this.mMessageList = mMessageList;
@@ -47,8 +52,22 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
     @Override
     public void onBindViewHolder(MessageViewHolder holder, int i) {
-
+        String current_user_id = mAuth.getCurrentUser().getUid();
         Messages c = mMessageList.get(i);
+
+        String from_user = c.getFrom();
+
+        if(from_user.equals(current_user_id)){
+            holder.messageText.setBackgroundColor(Color.WHITE);
+            holder.messageText.setTextColor(Color.BLACK);
+        }
+        else {
+            holder.messageText.setBackgroundResource(R.drawable.message_text_background);
+            holder.messageText.setTextColor(Color.WHITE);
+
+        }
+
+
         holder.messageText.setText(c.getMessage());
        // System.out.println("Printing +++++" + c.getMessage() + ":" + holder.toString());
         //Toast.makeText( ChatActivity.this, c.getMessage(), Toast.LENGTH_SHORT).show();
