@@ -40,10 +40,9 @@ public class ProfileActivity extends AppCompatActivity {
     private DatabaseReference mFriendRequestDatabase;
     private DatabaseReference mFriendDatabase;
     private DatabaseReference mNotificationDatabase;
-//iu
+
     private DatabaseReference mRootRef;
-    //
-    @SuppressWarnings("deprecation")
+
     private ProgressDialog mProgressDialog;
 
 
@@ -219,7 +218,7 @@ public class ProfileActivity extends AppCompatActivity {
                                 mProfileSendReqBtn.setText("Atšaukti pakvietimą");
                             }
                                 mProfileSendReqBtn.setEnabled(true);
-                            // ***
+
                         }
                     });
                 } // NOT FRIENDS STATE end
@@ -232,6 +231,7 @@ public class ProfileActivity extends AppCompatActivity {
                             mFriendRequestDatabase.child(user_id).child(mCurrent_user.getUid()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
+
                                     mProfileSendReqBtn.setEnabled(true);
                                     mCurrent_state = "not_friends";
 
@@ -265,7 +265,7 @@ public class ProfileActivity extends AppCompatActivity {
                                 mCurrent_state = "friends";
                                 mProfileSendReqBtn.setText("Pašalinti iš draugų");
 
-                                mDeclineBtn.setVisibility(View.VISIBLE);
+                                mDeclineBtn.setVisibility(View.INVISIBLE); // Pakeista is visible
                                 mDeclineBtn.setEnabled(false);
                             } else {
                                 String error = databaseError.getMessage();
@@ -290,7 +290,7 @@ public class ProfileActivity extends AppCompatActivity {
                                 mCurrent_state = "not_friends";
                                 mProfileSendReqBtn.setText("Pakviesti į draugus");
 
-                                mDeclineBtn.setVisibility(View.VISIBLE);
+                                mDeclineBtn.setVisibility(View.INVISIBLE); //pakeista is visible
                                 mDeclineBtn.setEnabled(false);
                             } else {
                                 String error = databaseError.getMessage();
