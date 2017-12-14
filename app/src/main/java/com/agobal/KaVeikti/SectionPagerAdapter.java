@@ -23,8 +23,10 @@ class SectionPagerAdapter extends FragmentPagerAdapter{
                 return kvietimaiFrag;
 
             case 1:
-                Pokalbiai pokalbiaiFrag = new Pokalbiai();
-                return pokalbiaiFrag;
+                /*Pokalbiai pokalbiaiFrag = new Pokalbiai();
+                return pokalbiaiFrag;*/
+                ChatsFragment chatsFragment = new ChatsFragment();
+                return chatsFragment;
 
 
             case 2:
