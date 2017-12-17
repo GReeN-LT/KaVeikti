@@ -210,14 +210,12 @@ public class ProfileActivity extends AppCompatActivity {
                             // for now
                             if (databaseError != null) {
                                 Toast.makeText(ProfileActivity.this, "Klaida siunčiant pakvietimą", Toast.LENGTH_SHORT).show();
-                            }
-
-                            else {
+                            } else {
 
                                 mCurrent_state = "req_sent";
                                 mProfileSendReqBtn.setText("Atšaukti pakvietimą");
                             }
-                                mProfileSendReqBtn.setEnabled(true);
+                            mProfileSendReqBtn.setEnabled(true);
 
                         }
                     });
@@ -281,7 +279,8 @@ public class ProfileActivity extends AppCompatActivity {
                     unfriendMap.put("Friends/" + mCurrent_user.getUid() + "/" + user_id, null);
                     unfriendMap.put("Friends/" + user_id + "/" + mCurrent_user.getUid(), null);
 
-                    mRootRef.updateChildren(unfriendMap, new DatabaseReference.CompletionListener() {
+                    mRootRef.updateChildren(unfriendMap, new DatabaseReference.CompletionListener()
+                    {
                         @Override
                         public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
 
