@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.google.firebase.analytics.FirebaseAnalytics;
-//dartau
 
 
 //TODO : email login DONE
@@ -21,11 +20,8 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-//
 
     private FirebaseAnalytics mFirebaseAnalytics;
-
-    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +59,3 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 }
-
-
-
